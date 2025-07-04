@@ -1,0 +1,153 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>قصر لحن للرشق</title>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Amiri', serif;
+      background: url('https://images.unsplash.com/photo-1574180045827-681f8a1a9622') no-repeat center center fixed;
+      background-size: cover;
+      color: #ffd700;
+      text-shadow: 1px 1px 3px #000;
+    }
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 40px;
+      min-height: 100vh;
+    }
+    header {
+      text-align: center;
+      padding-bottom: 20px;
+    }
+    header h1 {
+      font-size: 3em;
+      margin: 0;
+      border-bottom: 2px solid #ffd700;
+      display: inline-block;
+      padding-bottom: 10px;
+    }
+    nav {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #ffd700;
+      font-weight: bold;
+    }
+    section {
+      margin-bottom: 50px;
+    }
+    .service {
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+    form input, form select, form textarea, form button {
+      width: 100%;
+      margin-top: 10px;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      font-family: inherit;
+    }
+    form button {
+      background-color: #ffd700;
+      color: #000;
+      font-weight: bold;
+    }
+    footer {
+      text-align: center;
+      font-size: 0.9em;
+      color: #aaa;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay">
+    <header>
+      <h1>قصر لحن للرشق</h1>
+      <p>الرشق... لمن يستحق فقط</p>
+    </header>
+    <nav>
+      <a href="#services">الخدمات</a>
+      <a href="#order">طلب خدمة</a>
+      <a href="#contact">تواصل</a>
+    </nav>
+
+    <section id="services">
+      <h2>الخدمات المتوفرة</h2>
+      <div class="service">
+        <h3>رشق تيليغرام</h3>
+        <p>زيادة مشتركين، مشاهدات، تصويتات، تفاعلات</p>
+      </div>
+      <div class="service">
+        <h3>رشق انستغرام</h3>
+        <p>متابعين، لايكات، تعليقات، مشاهدات ريلز وستوري</p>
+      </div>
+      <div class="service">
+        <h3>رشق تيك توك ويوتيوب</h3>
+        <p>مشاهدات، لايكات، تعليقات، متابعين حقيقيين</p>
+      </div>
+    </section>
+
+    <section id="order">
+      <h2>طلب خدمة</h2>
+      <form id="orderForm">
+        <input type="text" name="name" placeholder="اسمك المستعار" required>
+        <input type="text" name="link" placeholder="رابط الحساب/القناة" required>
+        <select name="service">
+          <option value="tg">تيليغرام</option>
+          <option value="ig">انستغرام</option>
+          <option value="tt">تيك توك</option>
+          <option value="yt">يوتيوب</option>
+        </select>
+        <input type="number" name="amount" placeholder="الكمية المطلوبة" required>
+        <textarea name="notes" placeholder="ملاحظات أو تفاصيل إضافية"></textarea>
+        <button type="submit">إرسال الطلب</button>
+      </form>
+    </section>
+
+    <section id="contact">
+      <h2>طرق الدفع والتواصل</h2>
+      <p>💳 زين كاش / آسيا كاش متوفرة</p>
+      <p>📬 للتواصل المباشر: <a href="https://t.me/LHN_PANEL">@LHN_PANEL</a></p>
+    </section>
+
+    <footer>
+      &copy; 2025 - تصميم وتنفيذ لحن | جميع الحقوق محفوظة
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("orderForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const data = new FormData(this);
+      const message = `\u2728 طلب جديد من موقع لحن:\n\n` +
+        `\uD83D\uDC64 الاسم: ${data.get("name")}\n` +
+        `\uD83D\uDD17 الرابط: ${data.get("link")}\n` +
+        `\uD83D\uDD39 الخدمة: ${data.get("service")}\n` +
+        `\uD83D\uDCCA الكمية: ${data.get("amount")}\n` +
+        `\uD83D\uDCDD ملاحظات: ${data.get("notes") || "-"}`;
+
+      fetch(`https://api.telegram.org/bot8000273412:AAHzo897uYSvV75WR5SqTm4HdrLFgGQywc8/sendMessage`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chat_id: "6791146322",
+          text: message
+        })
+      }).then(() => alert("تم إرسال الطلب بنجاح! سيتم التواصل معك قريبًا.")).catch(() => alert("فشل في الإرسال. حاول مرة أخرى."));
+    });
+  </script>
+</body>
+</html>
